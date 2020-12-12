@@ -7,6 +7,10 @@
 </head>
 <body>
 	<div class="all">
+		<div class="time1">
+			<div class="time">
+			</div>
+		</div>
 		<div class="header">
 			<img src="image/logo.jpg">
 			<div class="nav">
@@ -25,7 +29,7 @@
 						<input type="text" placeholder="输入关键词" class="search"/>
 						<input type="button" class="submit"/>
 				</form>
-				<a href="#">登录</a>
+				<a href="#" id="denglu">登录</a>
 		    </div>
 		</div>
 		<div class="second">
@@ -125,11 +129,11 @@
 		<div class="three">
 			<div class="banner">
 				<ul>
-					<li class="bannerone"></li>
-					<li class="bannertwo"></li>
+					<li class="bannerone imgli"></li>
+					<li class="bannertwo imgli"></li>
 				</ul>
-				<img src="image/prev.png" class="prev">
-				<img src="image/next.png" class="next">
+				<img src="image/prev.png" class="prev bttn">
+				<img src="image/next.png" class="next bttn">
 			</div>
 		</div>
 		<div class="four">
@@ -295,5 +299,47 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		var i=0;
+		var btn=document.getElementById("denglu");
+		var li=document.getElementsByClassName("imgli");
+		var bttn=document.getElementsByClassName("bttn");
+		var time=document.getElementsByClassName("time")[0];
+		btn.onclick=function(){
+			window.location.href="denglu.html";
+		}
+		function ban(){
+			if(i==0){
+				li[i].style.zIndex=2;
+				li[i+1].style.zIndex=-1;
+				i++;
+			}else{
+				li[i].style.zIndex=3;
+				li[i-1].style.zIndex=-1;
+				i=0;
+			}
+		}
+		var clear=setInterval(ban,2000);
+		bttn[0].onmousedown=function(){
+			clearInterval(clear);
+			ban();
+		};
+		bttn[1].onmousedown=function(){
+			clearInterval(clear);
+			ban();
+		};
+		bttn[0].onmouseup=function(){
+			clear=setInterval(ban,2000);
+		}
+		bttn[1].onmouseup=function(){
+			clear=setInterval(ban,2000);
+		}
+		time.style.cssFloat="right";
+		setInterval(function(){
+			var now=new Date();
+			time.innerHTML=now.getHours()+"/"+now.getMinutes()+"/"+now.getSeconds();
+		},1000);
+		time.style.fontSize=26+'px';
+	</script>
 </body>
 </html>
